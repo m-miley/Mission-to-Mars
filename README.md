@@ -21,6 +21,7 @@ Recent Image
 
 ![Final Web Page](https://user-images.githubusercontent.com/100544761/170171444-d9011d7a-a15f-4801-96ac-ba872eacc28b.png)
 
+{: style="text-align: right" }
 05-24-22
 
 ### Contact
