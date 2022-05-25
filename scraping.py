@@ -10,7 +10,7 @@ import datetime as dt
 def scrape_all():
     # Initiate headless driver for deployment - Setup Splinter Driver
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=True)
+    browser = Browser('chrome', **executable_path, headless=False)
 
     # Implement mars_news() to scrape and gather title and paragraph text
     news_title, news_paragraph = mars_news(browser)
