@@ -17,10 +17,9 @@ This project is all about Mars.  Data is made available on a local web page usin
 
 ## Web Page
 
-Recent Image
+Recent Image 05-24-22
 
 ![Final Web Page](https://user-images.githubusercontent.com/100544761/170171444-d9011d7a-a15f-4801-96ac-ba872eacc28b.png)
-05-24-22
 
 ### Contact
 
