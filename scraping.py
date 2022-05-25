@@ -59,7 +59,7 @@ def mars_news(browser):
 ##### FEATURED IMAGES
 def featured_image(browser):
     # Visit URL
-    url = 'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html'
+    url = 'https://spaceimages-mars.com'
     browser.visit(url)
 
     # Find and click the full image button
@@ -78,7 +78,7 @@ def featured_image(browser):
         return None
 
     # Use the base URL to create an absolute URL
-    img_url = f'https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/{img_url_rel}'
+    img_url = f'https://spaceimages-mars.com/{img_url_rel}'
 
     return img_url
 
@@ -86,7 +86,7 @@ def featured_image(browser):
 def mars_facts():
     try:
         # Use Panas read_html() to scrape entire table
-        df = pd.read_html('https://data-class-mars-facts.s3.amazonaws.com/Mars_Facts/index.html')[0]
+        df = pd.read_html('https://galaxyfacts-mars.com')[0]
     
     except BaseException:
         return None
