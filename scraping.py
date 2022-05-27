@@ -5,7 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import datetime as dt
 
-####### MAIN FUNCTION
+####### MAIN FUNCTION ###########
 # Initialize browser, Create data dict, End WebDriver, and Return scraped data
 def scrape_all():
     # Initiate headless driver for deployment - Setup Splinter Driver
@@ -20,14 +20,15 @@ def scrape_all():
         'news_paragraph': news_paragraph,
         'featured_image': featured_image(browser),
         'facts': mars_facts(),
-        'last_modified': dt.datetime.now()
+        'last_modified': dt.datetime.now(),
+        'hemispheres': hemispheres(browser)
     }
 
     # Quite Driver and return data
     browser.quit()
     return data
 
-###### TITLE / SUBTITLE
+###### TITLE / SUBTITLE ###########
 def mars_news(browser):
     
     # Visit the mars nasa news site
@@ -56,7 +57,7 @@ def mars_news(browser):
     # Return news_title and news_p
     return news_title, news_p
 
-##### FEATURED IMAGES
+##### FEATURED IMAGES ###########
 def featured_image(browser):
     # Visit URL
     url = 'https://spaceimages-mars.com'
@@ -82,7 +83,7 @@ def featured_image(browser):
 
     return img_url
 
-########## TABLE DATA
+########## TABLE DATA ###########
 def mars_facts():
     try:
         # Use Panas read_html() to scrape entire table
@@ -97,6 +98,33 @@ def mars_facts():
 
     # Return Live updates - convert to html for web presentation, add bootstrap
     return df.to_html(classes="table table-striped")
+
+########## HEMISPHERES IMAGES ###########
+def hemispheres(browser):
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+    
+    hemisphere_image_urls = []
+    
+    img_soups = img_soup.find_all('div', class_="item")
+    
+    for img in img_soups:
+        enhanced_url = url + img.find('a')['href']
+        browser.visit(enhanced_url)
+        html = browser.html
+        img_soup2 = soup(html, 'html.parser')
+
+        full_img_url = url + img_soup2.find('img', class_='wide-image').get('src')
+        img_title = img_soup2.find('h2', class_='title').text
+        
+        hemispheres = {}
+        hemispheres['img_url'] = full_img_url
+        hemispheres['title'] = img_title
+        hemisphere_image_urls.append(hemispheres)
+    
+    return hemisphere_image_urls
 
 # If running locally, run program and print results
 if __name__ == "__main__":
