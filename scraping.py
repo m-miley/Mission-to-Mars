@@ -116,9 +116,12 @@ def hemispheres(browser):
         html = browser.html
         img_soup2 = soup(html, 'html.parser')
 
-        full_img_url = browser.links.find_by_text("Sample").first['href']
-        img_title = img_soup2.find('h2', class_='title').text
-        
+        try:
+            full_img_url = browser.links.find_by_text("Sample").first['href']
+            img_title = img_soup2.find('h2', class_='title').text
+        except AttributeError:
+            return None
+            
         hemispheres = {}
         hemispheres['img_url'] = full_img_url
         hemispheres['title'] = img_title
